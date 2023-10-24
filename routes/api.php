@@ -19,23 +19,28 @@ use App\Http\Controllers\Api\CarouselItemsController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
-// Route::get('/carousel', [CarouselItemsController::class, 'index']);
-// Route::get('/carousel/{id}', [CarouselItemsController::class, 'show']);
-// Route::post('/carousel', [CarouselItemsController::class, 'store']);
-// Route::put('/carousel/{id}', [CarouselItemsController::class, 'update']);
-// Route::delete('/carousel/{id}', [CarouselItemsController::class, 'destroy']);
-
-// Same functionality as the code above, for Carousel
+// For carousel
 Route::resource('carousel', CarouselItemsController::class);
 
-// Route::get('/user', [UserController::class, 'index']);
-// Route::get('/user/{1}', [UserController::class, 'show']);
-// Route::delete('/user/{id}', [UserController::class, 'destroy']);
+Route::get('/user', [UserController::class, 'index']);
+Route::delete('/user/{id}', [UserController::class, 'destroy']);
+Route::post('/user', [UserController::class, 'store']);
 
-Route::resource('user', UserController::class);
 
 Route::get('/greeting', function () {
     return "Hello World";
 });
+
+
+
+
+
+
+
+
+
+
+
+
+// Same functionality as the code below, for Carousel and User
+// Route::resource('user', UserController::class);
