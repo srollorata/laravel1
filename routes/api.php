@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CarouselItemsController;
+use App\Http\Controllers\Api\PromptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // For carousel
 // Route::resource('carousel', CarouselItemsController::class);
 
-// For user
-// Route::resource('carousel', CarouselItemsController::class);
+
+Route::resource('prompts', PromptController::class);
 
 Route::get('/carousel', [CarouselItemsController::class, 'index']);
 Route::get('/carousel/{id}', [CarouselItemsController::class, 'show']);
