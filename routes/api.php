@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CarouselItemsController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\PromptController;
 use App\Http\Controllers\OrderController;
 /*
@@ -28,6 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/logout', [AuthController::class,  'logout'])->name('user.logout');
 
+    //Administrators API
     Route::controller(CarouselItemsController::class)->group(function () {
         Route::get('/carousel',         'index');
         Route::get('/carousel/{id}',    'show');
@@ -40,12 +42,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/user',                 'index');
         Route::get('/user/{id}',            'show');
         Route::delete('/user/{id}',         'destroy');
-
         Route::put('/user/email/{id}',      'email')->name('user.email');
         Route::put('/user/password/{id}',   'password')->name('user.password');
-        Route::put('/user/image/{id}',   'image')->name('user.image');
+        Route::put('/user/image/{id}',      'image')->name('user.image');
         Route::put('/user/{id}',            'name')->name('user.name');
     });
+
+    // User specified API
+    Route::get('/profile/show', [ProfileController::class, 'show']);
+    Route::put('/profile/image', [ProfileController::class, 'image'])->name('profile.image');
 });
 
 Route::resource('prompts', PromptController::class);
