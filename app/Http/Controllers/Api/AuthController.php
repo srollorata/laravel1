@@ -29,4 +29,16 @@ class AuthController extends Controller
         ];
         return $response;
     }
+
+    // logout using the specified user
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+
+        $response = [
+            'message' => 'Logout'
+        ];
+
+        return $response;
+    }
 }
