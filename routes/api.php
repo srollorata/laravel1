@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
@@ -23,6 +24,9 @@ use App\Http\Controllers\OrderController;
 
 Route::post('/login', [AuthController::class,    'login'])->name('user.login');
 Route::post('/user', [UserController::class,    'store'])->name('user.store');
+
+// OCR Api
+Route::post('/ocr', [AiController::class, 'ocr'])->name('ocr.image');
 
 // private apis
 Route::middleware(['auth:sanctum'])->group(function () {
