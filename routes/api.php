@@ -28,6 +28,17 @@ Route::post('/user', [UserController::class,    'store'])->name('user.store');
 // OCR Api
 Route::post('/ocr', [AiController::class, 'ocr'])->name('ocr.image');
 
+Route::controller(UserController::class)->group(function () {
+    Route::get('/user',                 'index');
+    Route::get('/user/{id}',            'show');
+    Route::delete('/user/{id}',         'destroy');
+    Route::put('/user/email/{id}',      'email')->name('user.email');
+    Route::put('/user/password/{id}',   'password')->name('user.password');
+    Route::put('/user/image/{id}',      'image')->name('user.image');
+    Route::put('/user/{id}',            'name')->name('user.name');
+});
+
+
 // private apis
 Route::middleware(['auth:sanctum'])->group(function () {
 
@@ -42,15 +53,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/carousel/{id}',    'update');
     });
 
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/user',                 'index');
-        Route::get('/user/{id}',            'show');
-        Route::delete('/user/{id}',         'destroy');
-        Route::put('/user/email/{id}',      'email')->name('user.email');
-        Route::put('/user/password/{id}',   'password')->name('user.password');
-        Route::put('/user/image/{id}',      'image')->name('user.image');
-        Route::put('/user/{id}',            'name')->name('user.name');
-    });
+    // Route::controller(UserController::class)->group(function () {
+    //     Route::get('/user',                 'index');
+    //     Route::get('/user/{id}',            'show');
+    //     Route::delete('/user/{id}',         'destroy');
+    //     Route::put('/user/email/{id}',      'email')->name('user.email');
+    //     Route::put('/user/password/{id}',   'password')->name('user.password');
+    //     Route::put('/user/image/{id}',      'image')->name('user.image');
+    //     Route::put('/user/{id}',            'name')->name('user.name');
+    // });
 
     // User specified API
     Route::get('/profile/show', [ProfileController::class, 'show']);
